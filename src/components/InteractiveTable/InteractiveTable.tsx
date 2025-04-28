@@ -1,16 +1,15 @@
+import { Checkbox, InputNumber, Select, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { Table, Select, InputNumber, Checkbox, Spin } from 'antd';
-import type { TableRow } from '../../types/table.types';
 import { tableService } from '../../services/tableService';
+import type { TableRow } from '../../types/table.types';
 import './InteractiveTable.css';
 
 const { Option } = Select;
 
-const opciones = ['A', 'B', 'C', 'D'];
-
 const InteractiveTable: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<TableRow[]>([]);
+  const [opciones, setOpciones] = useState<string[]>([]);
   const [mostrarExtra, setMostrarExtra] = useState(false);
 
   useEffect(() => {
@@ -21,6 +20,7 @@ const InteractiveTable: React.FC = () => {
     try {
       const response = await tableService.getData();
       setData(response.rows);
+      setOpciones(response.opciones);
     } catch (error) {
       console.error('Error al cargar datos:', error);
     } finally {
