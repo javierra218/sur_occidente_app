@@ -71,7 +71,21 @@ const InteractiveTable: React.FC = () => {
           return (
             <InputNumber
               value={record.valores?.columna2}
-              onChange={value => handleChange(value || 0, record, 'valores.columna2')}
+              onChange={value => {
+                if (typeof value === 'number' && !isNaN(value)) {
+                  handleChange(value, record, 'valores.columna2');
+                }
+              }}
+              controls={false}
+              keyboard={false}
+              min={0}
+              precision={0}
+              type="number"
+              onKeyPress={e => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
             />
           );
         }
@@ -99,7 +113,21 @@ const InteractiveTable: React.FC = () => {
           return (
             <InputNumber
               value={record.valores?.columna3}
-              onChange={value => handleChange(value || 0, record, 'valores.columna3')}
+              onChange={value => {
+                if (typeof value === 'number' && !isNaN(value)) {
+                  handleChange(value, record, 'valores.columna3');
+                }
+              }}
+              controls={false}
+              keyboard={false}
+              min={0}
+              precision={0}
+              type="number"
+              onKeyPress={e => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
             />
           );
         }
